@@ -236,6 +236,16 @@ int main(void)
             
         }
     }
+    for(int i = 0; i < nomes.size(); i++)
+    {
+        float med = (notas1[i] + notas2[i]) / 2;
+        cout <<"Nome: " <<nomes[i] << endl << 
+        "Nota 1: " << notas1[i] << endl << 
+        "Nota 2: " << notas2[i] << endl <<
+        "Media: " << med << endl <<
+        (med >= 7 ? "Aprovado(a)" : "Reprovado(a)") << endl << 
+        " -------------------- " << endl;
+    }
 
     return 0;
 }
