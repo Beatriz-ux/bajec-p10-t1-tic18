@@ -43,4 +43,5 @@ int main(void)
         notas2.push_back(nota2);
         cout << endl;
     }
+    return 0;
 }
