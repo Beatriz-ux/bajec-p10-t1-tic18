@@ -78,10 +78,11 @@ int main(void)
         int inf = 0;
         int sup = nomes.size() - 1;
         int meio;
-        cin.ignore();
+        
         if (opcao == 1)
         {
             cout << "Nome do aluno: ";
+            cin.ignore();
             getline(cin, auxNome);
 
             // busca binaria
@@ -115,7 +116,6 @@ int main(void)
             cin.ignore();
             if (nomes.size() < qtdeAlunos)
             {
-                cout << "quantidade de alunos: " << nomes.size() << "\n\n";
                 cout << "Nome do aluno: ";
                 getline(cin, auxNome);
                 cout << "Nota 1: ";
@@ -175,7 +175,7 @@ int main(void)
     for(int i = 0; i < nomes.size(); i++)
     {
         float med = (notas1[i] + notas2[i]) / 2;
-        cout << nomes[i] << endl << 
+        cout <<"Nome: " << nomes[i] << endl << 
         "Nota 1: " << notas1[i] << endl << 
         "Nota 2: " << notas2[i] << endl <<
         "Media: " << med << endl <<
@@ -236,6 +236,7 @@ int main(void)
             
         }
     }
+
     for(int i = 0; i < nomes.size(); i++)
     {
         float med = (notas1[i] + notas2[i]) / 2;
