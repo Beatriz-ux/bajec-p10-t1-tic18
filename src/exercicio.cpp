@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
 int main(void)
 {
@@ -14,6 +15,7 @@ int main(void)
     cin >> qtdeAlunos;
     cin.ignore();
 
+    // Etapa 1: inserção de alunos
     for (int i = 0; i < qtdeAlunos; i++)
     {
         string nome;
@@ -33,11 +35,11 @@ int main(void)
         {
             cout << "Digite a segunda nota: ";
             cin >> nota2;
-            if (nota2 < 0 || nota1 > 10)
+            if (nota2 < 0 || nota2 > 10)
             {
                 cout << "Nota invalida!" << endl;
             }
-        } while (nota2 < 0 || nota1 > 10);
+        } while (nota2 < 0 || nota2 > 10);
 
         cin.ignore();
         nomes.push_back(nome);
@@ -46,6 +48,7 @@ int main(void)
         cout << endl;
     }
 
+    // Etapa 2: ordenação dos alunos (bubble sort)
     for (int i = 0; i < qtdeAlunos - 1; i++)
     {
         for (int j = 0; j < qtdeAlunos - 1 - i; j++)
@@ -66,6 +69,8 @@ int main(void)
             }
         }
     }
+
+    // Etapa 3: Inclusao e exclusao de aluno
     int opcao;
     do
     {
@@ -81,34 +86,37 @@ int main(void)
 
         if (opcao == 1)
         {
-            cout << "Nome do aluno: ";
-            cin.ignore();
-            getline(cin, auxNome);
+            if(nomes.size() == 0){
+                cout << "\n\nNao ha alunos cadastrados.\n\n";
+            }else{
+                cout << "Nome do aluno: ";
+                cin.ignore();
+                getline(cin, auxNome);
 
-            // busca binaria
-            while (inf <= sup)
-            {
-                meio = inf + ((sup - inf) / 2);
-                if (auxNome == nomes[meio])
+                // busca binaria
+                while (inf <= sup)
                 {
-                    inf = meio;
-                    break;
+                    meio = inf + ((sup - inf) / 2);
+                    if (auxNome == nomes[meio])
+                    {
+                        inf = meio;
+                        break;
+                    }
+                    else if (auxNome < nomes[meio])
+                        sup = meio - 1;
+                    else
+                        inf = meio + 1;
                 }
-                else if (auxNome < nomes[meio])
-                    sup = meio - 1;
-                else
-                    inf = meio + 1;
-            }
 
-            if (auxNome == nomes[inf])
-            {
-                nomes.erase(nomes.begin() + inf);
-                notas1.erase(notas1.begin() + inf);
-                notas2.erase(notas2.begin() + inf);
-            }
-            else
-            {
-                cout << "\n\nNome nao encontrado.\n\n";
+                if (auxNome == nomes[inf]){
+                    nomes.erase(nomes.begin() + inf);
+                    notas1.erase(notas1.begin() + inf);
+                    notas2.erase(notas2.begin() + inf);
+                    cout << "Aluno excluido com sucesso.\n\n";
+                }
+                else{
+                    cout << "\n\nNome nao encontrado.\n\n";
+                }
             }
         }
         else if (opcao == 2)
@@ -133,7 +141,7 @@ int main(void)
                 {
                     cout << "Nota 2: ";
                     cin >> auxNota2;
-                    if (auxNota2 < 0 || auxNota2 > 20)
+                    if (auxNota2 < 0 || auxNota2 > 10)
                     {
                         cout << "Nota invalida!" << endl;
                     }
@@ -180,29 +188,28 @@ int main(void)
         }
     } while (opcao == 1 || opcao == 2);
 
-    // mostrar nomes
-    cout << "\n\n";
-    cout << " -------------------- " << endl;
-
-    for (int i = 0; i < nomes.size(); i++)
-    {
-        float med = (notas1[i] + notas2[i]) / 2;
-        cout << "Nome: " << nomes[i] << endl
-             << "Nota 1: " << notas1[i] << endl
-             << "Nota 2: " << notas2[i] << endl
-             << "Media: " << med << endl
-             << (med >= 7 ? "Aprovado(a)" : "Reprovado(a)") << endl
-             << " -------------------- " << endl;
-    }
-
+    // Etapa 4 - mostrar nomes
+    float med;
     string alterar = "s";
 
-    while (alterar == "s")
-    {
+    do{
+        cout << "\n\n";
+        cout << " -------------------- " << endl;
+
+        
+        for (int i = 0; i < nomes.size(); i++)
+        {
+            med = (notas1[i] + notas2[i]) / 2;
+            cout << "Nome: " << nomes[i] << endl
+                << "Nota 1: " << notas1[i] << endl
+                << "Nota 2: " << notas2[i] << endl
+                << "Media: " << med << endl
+                << (med >= 7 ? "Aprovado(a)" : "Reprovado(a)") << endl
+                << " -------------------- " << endl;
+        }
         cout << "Deseja alterar alguma nota? (s/n): ";
         cin >> alterar;
-        if (alterar == "s")
-        {
+        if (alterar == "s"){
             string aluno;
             cout << "Digite o nome do aluno: ";
             cin >> aluno;
@@ -223,9 +230,9 @@ int main(void)
             else
             {
                 cout << "Nota 1: " << notas1[index] << endl
-                     << "Nota 2: " << notas2[index] << endl
-                     << "Media: " << (notas1[index] + notas2[index]) / 2 << endl
-                     << (notas1[index] + notas2[index] / 2 >= 7 ? "Aprovado(a)" : "Reprovado(a)") << endl;
+                    << "Nota 2: " << notas2[index] << endl
+                    << "Media: " << (notas1[index] + notas2[index]) / 2 << endl
+                    << (notas1[index] + notas2[index] / 2 >= 7 ? "Aprovado(a)" : "Reprovado(a)") << endl;
 
                 string alterarN;
 
@@ -261,18 +268,7 @@ int main(void)
                 }
             }
         }
-    }
-    cout << endl;
-    for (int i = 0; i < nomes.size(); i++)
-    {
-        float med = (notas1[i] + notas2[i]) / 2;
-        cout << "Nome: " << nomes[i] << endl
-             << "Nota 1: " << notas1[i] << endl
-             << "Nota 2: " << notas2[i] << endl
-             << "Media: " << med << endl
-             << (med >= 7 ? "Aprovado(a)" : "Reprovado(a)") << endl
-             << " -------------------- " << endl;
-    }
-
+    }while(alterar == "s");
+    
     return 0;
 }
