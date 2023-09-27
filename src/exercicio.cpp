@@ -6,6 +6,8 @@ int main(void)
     vector<string> nomes;
     vector<float> notas1;
     vector<float> notas2;
+    string auxNome;
+    float auxNota1, auxNota2;
 
     int N;
     cout << "Digite a quantidade de alunos: ";
@@ -43,5 +45,27 @@ int main(void)
         notas2.push_back(nota2);
         cout << endl;
     }
+
+    for(int i=0; i<N-1; i++)
+    {
+        for(int j=0; j<N-1-i; j++)
+        {
+            if(nomes[j] > nomes[j+1])
+            {
+                auxNome = nomes[j];
+                nomes[j] = nomes[j+1];
+                nomes[j+1] = auxNome;
+
+                auxNota1 = notas1[j];
+                notas1[j] = notas1[j+1];
+                notas1[j+1] = auxNota1;
+
+                auxNota2 = notas2[j];
+                notas2[j] = notas2[j+1];
+                notas2[j+1] = auxNota2;
+            }
+        }
+    }
+
     return 0;
 }
