@@ -118,10 +118,26 @@ int main(void)
             {
                 cout << "Nome do aluno: ";
                 getline(cin, auxNome);
-                cout << "Nota 1: ";
-                cin >> auxNota1;
-                cout << "Nota 2: ";
-                cin >> auxNota2;
+
+                do
+                {
+                    cout << "Nota 1: ";
+                    cin >> auxNota1;
+                    if (auxNota1 < 0 || auxNota1 > 10)
+                    {
+                        cout << "Nota invalida!" << endl;
+                    }
+                } while (auxNota1 < 0 || auxNota1 > 10);
+
+                do
+                {
+                    cout << "Nota 2: ";
+                    cin >> auxNota2;
+                    if (auxNota2 < 0 || auxNota2 > 20)
+                    {
+                        cout << "Nota invalida!" << endl;
+                    }
+                } while (auxNota2 < 0 || auxNota2 > 10);
                 if (nomes.size() == 0)
                 {
                     nomes.push_back(auxNome);
@@ -166,10 +182,6 @@ int main(void)
 
     // mostrar nomes
     cout << "\n\n";
-    for (int i = 0; i < nomes.size(); i++)
-    {
-        cout << nomes[i] << endl;
-    }
     cout << " -------------------- " << endl;
 
     for (int i = 0; i < nomes.size(); i++)
